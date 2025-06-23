@@ -1,0 +1,215 @@
+🔹 1. System Information
+
+uname -a         # Kernel and OS info
+hostname         # Show system hostname
+uptime           # How long the system has been running
+whoami           # Show current logged-in user
+arch             #show system architecture
+
+
+
+🔹 2. Directory and File Management
+bash
+
+pwd                      # Show current directory
+ls                       # List files in current directory
+ls -la                   # List all files with details
+cd /path/to/dir          # Change directory
+mkdir new_folder         # Create directory
+rmdir folder_name        # Remove empty directory
+rm file.txt              # Delete file
+rm -r folder_name        # Delete folder and contents
+cp file1 file2           # Copy file
+cp -r dir1 dir2          # Copy directory
+mv file1 file2           # Move/rename file
+touch file.txt           # Create empty file
+stat file.txt            # Show file info
+
+
+
+
+🔹 3. Viewing and Editing Files
+bash
+
+cat file.txt             # Show file contents
+less file.txt            # Page through file
+more file.txt            # Alternative to less
+head -n 10 file.txt      # First 10 lines
+tail -n 10 file.txt      # Last 10 lines
+nano file.txt            # Open file in Nano editor
+vi file.txt              # Open file in Vi editor
+geit file.txt            # gui text editor
+
+
+
+
+
+🔹 4. Searching
+bash
+
+find / -name file.txt           # Find file
+find . -type f -name "*.sh"     # Find shell scripts
+grep "text" file.txt            # Search for "text"
+grep -r "main()" .              # Search recursively
+locate file.txt                 # Find file (uses DB)
+
+
+
+
+
+
+🔹 5. Permissions and Ownership
+bash
+
+chmod 755 script.sh           # Set permissions
+chmod +x script.sh            # Make file executable
+chown user:group file.txt     # Change ownership
+ls -l                         # Show permissions
+umask                         # Show default permissions
+
+
+
+
+
+🔹 6. Disk and Filesystem
+bash
+
+
+df -h                        # Disk space usage
+du -sh folder/               # Folder size
+mount /dev/sdX /mnt         # Mount disk
+umount /mnt                 # Unmount disk
+fsck /dev/sdX               # Check filesystem
+lsblk                       # list block devices
+
+
+
+
+🔹 7. Archiving and Compression
+bash
+
+
+tar -czvf archive.tar.gz folder/      # Compress
+tar -xzvf archive.tar.gz              # Extract
+zip archive.zip file1 file2           # Create ZIP
+unzip archive.zip                     # Extract ZIP
+gzip file.txt                         # Compress
+gunzip file.txt.gz                    # Decompress
+
+
+
+
+
+🔹 8. User Management
+bash
+
+adduser nency              # Add new user
+passwd nency              # Set password
+deluser nency             # Delete user
+usermod -aG sudo nency    # Add user to sudo group
+who                       # Who is logged in
+id                        # Current user UID, GID
+whoami                    # current username
+su nency                  # switch user
+sudo command              #run as superuser
+gropus                    # show groups of current user
+
+
+
+
+🔹 9. Process Management
+bash
+
+top                       # Live process monitor
+htop                      # Advanced monitor (install required)
+ps aux                    # Show all processes
+kill PID                  # Kill process by PID
+killall firefox           # Kill process by name
+nice -n 10 command        # Run with priority
+
+
+
+
+🔹 10. Networking
+bash
+
+ip a                      # Show IP addresses
+ifconfig                  # Network info (older)
+ping 8.8.8.8              # Test connection
+netstat -tuln             # Show open ports (use ss instead)
+ss -tuln                  # Show sockets
+curl http://example.com   # Fetch web content
+wget http://file.zip      # Download file
+scp file user@host:/path  # Secure copy
+ssh user@host             # SSH login
+hostname -I               # show ip address
+
+
+
+
+🔹 11. Package Management
+Debian/Ubuntu (apt)
+
+bash
+
+sudo apt update               # Update package list
+sudo apt upgrade              # Upgrade packages
+sudo apt install nginx        # Install package
+sudo apt remove nginx         # Remove package
+RedHat/CentOS (yum/dnf)
+
+sudo dpkg -i package.ded      # install .deb file
+sudo apt autoremove           # remove unused packages
+
+sudo dnf install nginx        # Install
+sudo dnf remove nginx         # Remove
+
+
+
+
+🔹 12. System Monitoring
+bash
+
+uptime                     # System uptime
+free -h                    # RAM usage
+vmstat                     # System performance
+iostat                     # CPU/disk I/O stats (install: sysstat)
+watch df -h                # Watch command output
+
+
+
+🔹 13. Scheduling Jobs
+bash
+
+crontab -e                      # Edit cron jobs
+crontab -l                      # List cron jobs
+at 5pm                          # Schedule task once (install `at`)
+
+
+
+
+🔹 14. Miscellaneous
+bash
+
+history                      # Command history
+clear                        # Clear terminal
+echo "Hello"                 # Print text
+date                         # Show date and time
+cal                          # Calendar
+alias ll='ls -la'            # Create alias
+
+
+
+🔹 15. Shell Scripting (basic example)
+bash
+
+#!/bin/bash
+echo "Backup started"
+tar -czf backup.tar.gz /home/user/Documents
+echo "Done"
+
+
+
+chmod +x backup.sh
+./backup.sh
+

@@ -1,0 +1,165 @@
+------------------------------------------------set up   of my sql in win11------------------------------------------------------------------------------------
+
+
+-> search my sql -> open 1st link -> click on mysql community (gpl) Downloads.
+ gpl(genered public license) -> click my sql community server select appropriale version nd OS and next.(msi file)
+
+-> start setup
+ 
+       -> next -> accept t&c -> next -> compalete -> next -> install -> finish.
+
+
+-> in my sql configura ...
+     next -> path -> next -> config type -> developer computer . everything defualt
+ next -> set root password . we can add user by creating it and give password .
+next -> grcint full service -> next add both database if incase we don't want to create our own. next-> exceute -> next -> finish.
+
+-> connect mysql command line client using root password . 
+
+command for mysql :-
+               /h = help
+               /u = my db(database)
+	       show databases = show databases create in mysql
+	       create database <name of database> = create database
+
+Now Download a Mysql Workbench exectly the way MySQL did.
+  
+ 
+
+ -> set up it (compelte version and install.) launch mysql workbench 
+
+-> now we will create table in database through gui console
+
+-> create able employees (
+
+        employees_id INI,
+        first_name VARCHAR(50),
+        last_name VARCHAR(50),
+        hourly_pay DECIMAL(5,2),
+        hire_date DATA
+  );
+
+
+------------------------------------------sql setup in networking-------------------------------------------------------------------------------
+
+
+Aa process ne step-by-step Gujarati ma samjaviye:
+
+
+---
+
+🔧 1. Remote Access Enable Karvu (Server Side)
+
+Default rite MySQL localhost thi j access allow kare che. Biju koi PC thi access karvu hoy to:
+
+👉 Step:
+
+MySQL configuration file (my.cnf athva my.ini) open karo.
+
+Aa line ne search karo ane comment karo (athva bind karo to 0.0.0.0):
+
+
+bind-address = 127.0.0.1
+
+Change to:
+
+bind-address = 0.0.0.0
+
+Pachhi MySQL server restart karo.
+
+
+
+---
+
+🧑‍💻 2. Navo User Create Karvo ane Access Aapvu
+
+Suppose tame remoteuser naam no user banavva mago cho ane tema SELECT ane UPDATE j privileges aapva chho to:
+
+CREATE USER 'remoteuser'@'%' IDENTIFIED BY 'strongpassword';
+GRANT SELECT, UPDATE ON databasename.* TO 'remoteuser'@'%';
+
+🔹 '%' no arth che koi pan IP thi access kari shake.
+🔹 Tame specific IP address pan lakhishako chho, jeva ke:
+
+CREATE USER 'remoteuser'@'192.168.1.100' IDENTIFIED BY 'strongpassword';
+
+👇 Other Example Privileges:
+
+Kam	Privilege
+
+Sirf data joi shake	SELECT
+Data insert kari shake	INSERT
+Data update kari shake	UPDATE
+Data delete kari shake	DELETE
+Table create kari shake	CREATE
+Table delete (drop) kari shake	DROP
+
+
+Example:
+
+GRANT INSERT, UPDATE ON mydb.mytable TO 'remoteuser'@'%';
+
+
+---
+
+✅ 3. Privilege Apply Karva (Flush Karvu)
+
+FLUSH PRIVILEGES;
+
+
+---
+
+🌐 4. Firewall/Open Port Check
+
+MySQL 3306 port use kare che. Ensure karo ke firewall ma 3306 port open hoy:
+
+Linux firewall (UFW):
+
+
+sudo ufw allow 3306
+
+Windows Firewall ma:
+
+Inbound rule create karo port 3306 mate.
+
+
+
+
+---
+
+👨‍💻 5. Client Side thi Connect Karvu
+
+Biju user tame aapelo IP, user, ane password thi connect thai shake:
+
+mysql -h 192.168.1.50(server ip addess & host) -u remoteuser -p
+
+
+---
+
+🔒 Optional: User ne revoke/delete karvu hoy to:
+
+REVOKE INSERT, UPDATE ON mydb.* FROM 'remoteuser'@'%';
+DROP USER 'remoteuser'@'%';
+
+
+---
+
+Tame j privilege aapo chho e niyamit chhe, etle security maintain thai shake.
+
+Jova mago ke koi specific user ne su access chhe to:
+
+SHOW GRANTS FOR 'remoteuser'@'%';
+
+
+---
+
+Agar tame chho ke tame biji system ne read-only access aapva mago chho to:
+
+GRANT SELECT ON mydb.* TO 'readonlyuser'@'%' IDENTIFIED BY 'password';
+
+
+
+-----------------------------------------------------set peimision in server to client----------------------------------------------------------------------------
+ 
+   greant create , updates, drop, delete , alter , bizinsigths.customers to 'nency'@'192.168.0.172(client ipaddress)'
+

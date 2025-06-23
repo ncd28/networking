@@ -1,0 +1,32 @@
+
+
+how to set up network sharing windows and share file , folder between computer
+
+
+
+
+server 
+
+1) setting -> network & internet -> ethernet -> click a ethernet 
+2) network profile -> private select
+
+
+
+
+3) status -> network and sharing center -> Advanced sharing setting
+4) private(current profile) -> trun on anetwork discovery and -> file and printer sharing 
+ trun on file and printer sharing
+5) all networks -> trun on sharing so anyone with network access can read and white files in the public folder
+ -> use 128-bit encryption to help protect file sharing connecions(recommanded) (allowed)
+ -> trun off password protected sharing -> save changes
+
+
+6)win + e 
+7) this pc right click -> propeties -> Advanced system settings -> change computer name 
+-> remote -> remote desktop -> don't allow remote connection to this computer -> apply and ok
+
+
+client
+
+1) win + e 
+2) network -> your server show in clinet system 

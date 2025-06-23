@@ -1,0 +1,27 @@
+only file sharing 
+    -windows to windows
+    -create folder (like data)
+    -right-click(data folder)->properties -> sharing -> sharing this folder true
+    -set a permission for user
+    -ok
+    -then check a file in other windows 
+
+specific ip address through filr sharing
+
+      -create folder
+      -set permission
+
+create inbound rule for allowed 
+      -then create inbound rule in firewall 
+      -inbounf rule-> click new rule 
+      -predefined ->select:file and printer sharing -> next
+      -enble all relevant rules(especially smb-in)
+      -next -> select allow the connection -> finish
+      
+     --find rule 
+      -rule then right click -> propertirs
+      - go to scope tab
+      -remote ip address-> set ip addesss(allows system)
+    -action is a allow
+    
+create inbound rule for block a ipaddress of not allow a specific system(same methods but action is a block set)          

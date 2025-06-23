@@ -1,0 +1,155 @@
+✅ Step 1: Download SQL Server
+Go to the official Microsoft SQL Server download page:
+https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+
+Choose your edition:
+
+Developer (Free for development/testing)
+
+Express (Free lightweight version)
+
+✅ Step 2: Install SQL Server
+Run the downloaded installer (e.g., SQL2019-SSEI-Dev.exe).
+
+Choose Basic or Custom:
+
+Basic: Quick install with default settings.
+
+Custom: Lets you choose features, install path, etc.
+
+Accept the license terms.
+
+Installation will begin. Wait for it to complete.
+
+Note the Instance name (default is MSSQLSERVER).
+
+✅ Step 3: Install SQL Server Management Studio (SSMS)
+This tool is used to manage databases.
+
+Download SSMS:
+https://aka.ms/ssms
+
+Run the installer.
+
+Follow the installation steps (default settings are fine).
+
+After installation, launch SSMS.
+
+✅ Step 4: Connect to SQL Server in SSMS
+Open SQL Server Management Studio.
+
+In the Connect to Server dialog:
+
+Server Type: Database Engine
+
+Server Name: Use localhost, . or .\SQLEXPRESS (for Express edition)
+
+Authentication: Windows Authentication (or SQL Server Auth if you set it)
+
+Click Connect.
+
+✅ Optional: Enable Mixed Mode (SQL + Windows Authentication)
+If you want to use SQL Server Authentication (login with username/password):
+
+Open SQL Server Configuration Manager.
+
+Go to SQL Server Services, right-click on the instance, and select Properties.
+
+Under Security, select SQL Server and Windows Authentication mode.
+
+Restart the SQL Server service.
+
+✅ Step 5: Create a Database
+In SSMS, right-click Databases → New Database.
+
+Name your database and click OK.
+
+⚠️ Notes:
+Ports: Make sure port 1433 is open if accessing SQL Server over a network.
+
+Firewall: Allow sqlservr.exe in your firewall settings if needed.
+
+Services: Ensure SQL Server (MSSQLSERVER) and SQL Server Browser are running
+
+
+
+
+
+
+
+
+✅ Step-by-Step Solution
+🔹 1. Ensure SQL Server is running on 192.168.1.6
+On the server system (192.168.1.6):
+
+Press Windows + R → type services.msc
+
+Find SQL Server (MSSQLSERVER) or your named instance (like SQL Server (SQLEXPRESS))
+
+Make sure its status is Running
+
+🔹 2. Enable TCP/IP Protocol
+On the server:
+
+Open SQL Server Configuration Manager
+
+Navigate to: SQL Server Network Configuration > Protocols for MSSQLSERVER
+
+Right-click TCP/IP → Enable it
+
+Restart the SQL Server service
+
+🔹 3. Ensure Port 1433 is Used
+Still in SQL Server Configuration Manager:
+
+Go to TCP/IP → Right-click → Properties
+
+Go to IP Addresses tab
+
+Scroll to IPAll section → Make sure:
+
+TCP Port = 1433
+
+TCP Dynamic Ports = blank
+
+Restart the SQL Server service
+
+🔹 4. Allow Port 1433 Through Windows Firewall
+On the server (192.168.1.6):
+
+Open Windows Defender Firewall > Advanced Settings
+
+Inbound Rules → New Rule
+
+Type: Port
+
+TCP, Specific port: 1433
+
+Allow the connection
+
+Apply to Domain, Private, Public
+
+Name it “SQL Server 1433”
+
+
+ 5. Verify SQL Server Allows Remote Connections
+Open SSMS on the server
+
+Right-click server name → Properties
+
+Go to Connections
+
+Check: ✅ "Allow remote connections to this server"
+
+
+ 6. Ping Test From Client
+On the client PC (trying to connect):
+
+Press Windows + R → type cmd
+
+Run:
+
+bash
+Copy
+Edit
+ping 192.168.1.6
