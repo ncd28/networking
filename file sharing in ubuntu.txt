@@ -1,0 +1,75 @@
+-----------------------------------------------------------------------------basic sharing file in ubuntu without set user permissions-----------------------------------------------------
+update ypur system -> sudo apt update
+install samba service -> sudo apt install samba -y
+
+create folder -> mkdir -p /srv/samba/<foldername>
+set perimissions in folder -> chmod -R 777 /srv/samba/<foldername>
+
+setup a samba configure file -> sudo nano etc/samba/smb.conf
+ edit setup file    => type in botten
+                       [share]
+				path = /srv/samba/<foldername>
+				browsable = yes
+				read only = no
+				avilable = yes
+				public = yes
+				
+                          save file => ctrl+x and y and enter
+set password => sudo smbpasswd -a username
+restart samba =. sudo systemctl restart smbd
+
+
+Access from another system 
+            from windows => win+r -> \\<ubuntu system ip address>  -. enter
+	    from linux   => file manger -> other location -> smb://ipaddress<ubnutu system>/shared
+
+
+
+
+----------------------------------------------------------------------------set user permissions in file sharing(ubuntu)----------------------------------------------------------------------------	
+
+     | user add in ubnutu -> sudo adduser <username>  
+     | group add in ubuntu -> sudo groupadd <groupname>
+     | user add in group -> sudo usermod -aG <groupname> <username>
+
+
+
+---install samba servies
+---create a folder deffernt folder for particular user 
+--- set owner all foder   -> sudo chown -R root:<groupname> /srv/samba/<foldername>
+--- set permissions all folder ->sudo chmod 2775 /srv/samba/<foldername>
+
+
+---setup a samba configure file -> sudo nano etc/samba/smb.conf
+ edit setup file    => type in botten
+                       [<foldername1>share]
+				path = /srv/samba/<foldername1>         |all folderare share  
+				browsable = yes                        |folder in deffent user are set 
+				read only = no
+				vaild user = <username1>
+				
+			
+                       [<foldername2>share]	
+				path = /srv/samba/<foldername2>
+                                browsable = yes    
+                                read only = no
+				vaild user = <username2>
+
+
+restart samba =. sudo systemctl restart smbd
+status samba  => sudo systemctl status smbd
+
+
+*************************************************ownership check -> ls - ld /srv/samba/shared
+
+-------------------------------------------------------------------setup ACL(Access control list) for set user permissions---------------------------------------------------******
+
+---install Acl -> sudo apt install acl
+---set permissions for user -> sudo setfacl -m u:<username>:rwx(permissions) /srv/samba/foldername
+                  [set all user permissions]
+----set permissions for group -> sudo setfacl -m u:groupname:rwx(permissions) /srv/samba/foldername
+                  [set all group permissions]
+----check permissions => getfacl /srv/samba/foldername
+
+---restart samba =. sudo systemctl restart smbd
+---status samba  => sudo systemctl status smbd
