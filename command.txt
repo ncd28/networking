@@ -1,0 +1,17 @@
+
+
+
+******command for MYSQL****
+
+docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql:latest
+
+********command for Postgresql**************
+
+docker run -d --name postgres -e POSTGRES_PASSWORD=rootpass -p 5433:5432 postgres:latest
+
+
+******command for a MSSQL*******
+
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=mssql@1234" -p 1434:1433  --name mssql_container  -d mcr.microsoft.com/mssql/server:2022-latestt
