@@ -1,0 +1,16 @@
+solve anydesk error 
+
+sudo nano /etc/gdm3/custom.conf
+   ->WaylandEnble=false
+   
+sudo systemctl restart gdm
+
+
+process kill command
+
+->sudo lsof -i 33389
+->sudo kill 1021
+
+sudo systemctl restart anydesk
+sudo systemctl status anydesk
+
