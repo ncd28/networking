@@ -1,0 +1,199 @@
+- Search MySql ->open 1st link -> click on MySql community (GPL) -> Download it.
+- GPLC (General Public License)
+- Click MySql community server -> select Appropriate version and operating system -> Next. (MSI file)
+
+******* START SETUP*********
+
+- Next -> Accept T&C -> Next -> Complete -> Next -> Install -> Finish.
+
+-> In MySql Configurator:-
+
+Next -> Path -> Next -> Config type -> Developer Computer/Server Computer(as per requirement) -> veerything defualt -> Next
+-> set root password (We can add user by creating it and give password) -> next -> grant full service -> next
+(Add both inbuilt database if incase we don't want create our own database.)
+-> Next -> Execute -> Next -> Finish.
+
+
+connect MYSQL command line client using root password.
+\h, \r, \u mydb
+
+< MY SQL IS NOT CASE SENSITIVE.>
+
+******* Command for Creating Database ******** 
+-create database mydb;
+-use mydb
+-show database;
+
+***Now download MYSQL Workbench execty the way we did MYSQl.***
+
+-> set up it.(with complete version and install.)
+<Accept> luanch MYSQL Workbench.
+
+**** NOW WE WILL CREATE TABLE IN DATABASE THROUG GUI CONSOLE****
+
+CREATE TABLE employee_details (
+    employee_id SERIAL PRIMARY KEY,
+    employee_name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    salary NUMERIC(10, 2),
+    hire_date DATE DEFAULT CURRENT_DATE
+);
+
+
+
+INSERT INTO employee_details (employee_name, department, salary)
+VALUES 
+  ('Jency Gheewala', 'IT', 60000.00),
+  ('Amit Patel', 'HR', 50000.00),
+  ('Sneha Shah', 'Finance', 55000.00);
+
+
+
+SELECT * FROM employee_details;
+
+
+
+
+******************PRIMARY KEY********************
+
+Key Characteristics of a Primary Key:
+✅ Unique – No two rows can have the same primary key value.
+
+✅ Not Null – A primary key column cannot contain NULL values.
+
+✅ Only one – A table can have only one primary key (though it can consist of multiple columns).
+
+
+
+
+***************** FOREIGN KEY********************
+
+🔑 Key Characteristics of a Foreign Key:
+
+📌 It enforces referential integrity – prevents inserting invalid data or deleting linked data.
+
+🔄 It can define ON DELETE or ON UPDATE actions (like CASCADE, SET NULL, RESTRICT, etc.).
+
+📎 It refers to a primary key or a unique key in another table.
+
+
+
+
+
+*** Now the task is, MYSQL set up that we did will work as MYSQL server through which we will share our data within our network.***
+
+🔧 1. Remote Access Enable Karvu (Server Side)
+Default rite MySQL localhost thi j access allow kare che. Biju koi PC thi access karvu hoy to:
+
+👉 Step:
+MySQL configuration file (my.cnf athva my.ini) open karo.
+
+Aa line ne search karo ane comment karo (athva bind karo to 0.0.0.0):
+
+ini
+Copy
+Edit
+bind-address = 127.0.0.1
+Change to:
+
+ini
+Copy
+Edit
+bind-address = 0.0.0.0
+Pachhi MySQL server restart karo.
+
+
+
+🧑‍💻 2. Navo User Create Karvo ane Access Aapvu
+Suppose tame remoteuser naam no user banavva mago cho ane tame SELECT ane UPDATE j privileges aapva chho to:
+
+sql
+Copy
+Edit
+CREATE USER 'remoteuser'@'%' IDENTIFIED BY 'strongpassword';
+GRANT SELECT, UPDATE ON databasename.* TO 'remoteuser'@'%';
+🔹 '%' no arth che koi pan IP thi access kari shake.
+🔹 Tame specific IP address pan lakhishako chho, jeva ke:
+
+sql
+Copy
+Edit
+CREATE USER 'remoteuser'@'192.168.1.100' IDENTIFIED BY 'strongpassword';
+👇 Other Example Privileges:
+Kam	Privilege
+Sirf data joi shake	SELECT
+Data insert kari shake	INSERT
+Data update kari shake	UPDATE
+Data delete kari shake	DELETE
+Table create kari shake	CREATE
+Table delete (drop) kari shake	DROP
+
+Example:
+
+sql
+Copy
+Edit
+GRANT INSERT, UPDATE ON mydb.mytable TO 'remoteuser'@'%';
+
+
+
+✅ 3. Privilege Apply Karva (Flush Karvu)
+sql
+Copy
+Edit
+FLUSH PRIVILEGES;
+
+
+🌐 4. Firewall/Open Port Check
+MySQL 3306 port use kare che. Ensure karo ke firewall ma 3306 port open hoy:
+
+Linux firewall (UFW):
+
+bash
+Copy
+Edit
+sudo ufw allow 3306
+Windows Firewall ma:
+
+Inbound rule create karo port 3306 mate.
+
+
+
+👨‍💻 5. Client Side thi Connect Karvu
+Biju user tame aapelo IP, user, ane password thi connect thai shake:
+
+bash
+Copy
+Edit
+mysql -h 192.168.1.50 -u remoteuser -p
+🔒 Optional: User ne revoke/delete karvu hoy to:
+sql
+Copy
+Edit
+REVOKE INSERT, UPDATE ON mydb.* FROM 'remoteuser'@'%';
+DROP USER 'remoteuser'@'%';
+Tame j privilege aapo chho e niyamit chhe, etle security maintain thai shake.
+
+Jova mago ke koi specific user ne su access chhe to:
+
+sql
+Copy
+Edit
+SHOW GRANTS FOR 'remoteuser'@'%';
+Agar tame chho ke tame biji system ne read-only access aapva mago chho to:
+
+sql
+Copy
+Edit
+GRANT SELECT ON mydb.* TO 'readonlyuser'@'%' IDENTIFIED BY 'password';
+
+(( We need every ip address for which we want to create userid and password.
+Give Privillages to every user as per requirement ))
+
+
+
+
+
+
+
+  

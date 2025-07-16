@@ -1,0 +1,87 @@
+**************** Basic Linux Components********************
+
+
+Component	                           Description
+
+Kernel	                   Core of the OS, manages resources and hardware
+Shell	                   Interface to interact with the system using commands
+Filesystem	 Hierarchical structure to store files and directories
+Package Manager	Tool to install, update, and manage software (apt, yum, etc.)
+
+
+*********************Common Linux Directories*********************
+
+
+Directory	Purpose
+
+/	Root directory (top of the file system)
+/home	User directories
+/etc	Configuration files
+/bin	Essential binary programs
+/var	Logs and variable files
+/usr	User-installed software
+
+
+
+ 🐧 Basic Linux Commands Cheat Sheet
+🔍 File and Directory Management
+Command	Description
+ls	List files and directories
+ls -l	Long listing with permissions
+cd dir	Change to directory dir
+pwd	Print current working directory
+mkdir dir	Create a new directory
+rmdir dir	Remove an empty directory
+rm file	Delete a file
+rm -r dir	Delete a directory and contents
+touch file	Create an empty file
+cp file1 file2	Copy file1 to file2
+mv file1 file2	Move or rename a file
+cat file	View file contents
+nano file	Open file in nano editor
+vim file	Open file in vim editor
+
+👤 User and Permissions
+Command	Description
+whoami	Show current user
+id	Show user and group info
+chmod 755 file	Change file permissions
+chown user:group file	Change file ownership
+
+🖥️ Process and System Info
+Command	Description
+ps	Show running processes
+top	Real-time system monitor
+kill PID	Kill a process by PID
+uptime	Show how long the system is running
+df -h	Show disk space usage
+free -h	Show memory usage
+
+🌐 Network Commands
+Command	Description
+ping host	Check network connectivity
+ip a or ifconfig	Show IP addresses
+netstat -tuln	Show open ports
+ssh user@host	Connect to remote server via SSH
+scp file user@host:/path	Securely copy file to remote host
+
+📦 Package Management (Ubuntu/Debian)
+Command	Description
+sudo apt update	Update package list
+sudo apt install package	Install a package
+sudo apt remove package	Remove a package
+
+📁 Search and Find
+Command	Description
+find /path -name file	Find file in directory
+grep 'text' file	Search for text in file
+
+🧪 Scripting and Execution
+Command	Description
+./script.sh	Run shell script
+chmod +x script.sh	Make script executable
+
+
+
+
+

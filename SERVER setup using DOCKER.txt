@@ -1,0 +1,180 @@
+***********************************************Document about setup of MsSql , MySql, & Postgrecsql using Docker**********************************************  
+
+Pre-requirements for installation:---
+
+--  Pc needs server set of all of the above 
+-- notedown the version of your setup
+-- Your pc needs the setup of Docker as well
+
+
+clearification :- Using docker does not containrize particular database instead it containrize whole server(mysql, mssql, postgresql)
+then client can join using given credantial
+
+
+
+
+***************command for MYSQL****************
+
+docker pull mysql:latest
+docker run --name mysqlserver   -e MYSQL_ROOT_PASSWORD=yourStrongPassword   -p 3306:3306 -d mysql:latest
+                                                                                                                                                            3307:3306    (EXAMPLE)
+                                                                                                                                                            3308:3306    (EXAMPLE)
+(here we have to give our own name , password, and different port for docker container)
+
+
+On other PC, connect with:
+
+Host: 192.168.1.100
+Port: 3306(depnding on yours)
+
+
+
+Connection details:
+
+Field	             Value
+
+Host	           localhost
+Port	           3306
+Username	           root
+Password	           yourStrongPassword
+
+Make sure port 3306 is allowed in Windows Firewall
+
+
+
+
+
+************command for Postgresql**************
+
+docker pull postgres:16
+mkdir C:\docker\postgres\data
+docker run -d   --name postgres   -e POSTGRES_PASSWORD=MyStrong@Passw0rd   -p 5432:5432   -v C:\docker\postgres\data:/var/lib/postgresql/data   postgres:16
+                                                                                                                                                         5433:5432   (EXAMPLE)
+                                                                                                                                                         5434:5432   (EXAMPLE)   
+(here we have to give our own name , password, and different port for docker container)
+
+
+On another PC, connect using:
+
+Host: 192.168.1.20
+Port: 5432
+Make sure Windows Firewall allows port 5432.
+
+
+Connection info:
+
+
+Parameter	Value
+
+Host	                localhost
+Port	                5432
+Username	                admin
+Password	                YourStrongPassword
+Database	                mydb
+
+
+
+
+
+
+************command for a MSSQL**************
+
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourStrong!Passw0rd"   -p 1433:1433 --name sqlserver   -d mcr.microsoft.com/mssql/server:2022-latest
+                                                                                                                                               1432:1433      (EXAMPLE)
+                                                                                                                                               1434:1433      (EXAMPLE)
+(here we have to give our own name , password, and different port for docker container)
+
+
+Connection details:
+
+Server name: localhost,1433 or 127.0.0.1,1433
+Login: sa
+Password: YourStrong!Passw0rd
+(For mysql on initial stage docker allows only sa user to login after that we can create other user and logins.)
+
+
+
+
+PUT THIS ALL COMMAND ON COMMAND PROMT OR POWERSHELL ON YOUR WINDOWS MACHINE. 
+Make sure your container is running otherwise you will not be able to connect it
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

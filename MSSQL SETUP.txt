@@ -1,0 +1,253 @@
+✅ MSSQL Server Setup on Windows
+1. Download SQL Server
+Visit: https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+
+Choose:
+
+Developer Edition (Free, full-featured for development)
+
+Express Edition (Lightweight version)
+
+2. Run the Installer
+Choose Basic, Custom, or Download Media.
+
+For beginners, select Basic.
+
+Accept license terms and start the installation.
+
+3. Install SQL Server Management Studio (SSMS)
+Download from: https://aka.ms/ssms
+
+Install SSMS to manage databases with GUI.
+
+4. Connect to SQL Server via SSMS
+Server name: localhost or .\SQLEXPRESS (if Express)
+
+Authentication: Windows Authentication or SQL Server Authentication (if set up)
+
+
+
+✅ Goal:
+Allow another user (on the same network or remotely) to access your MSSQL Server instance and its databases.
+
+
+
+🧩 Step-by-Step Guide:
+✅ 1. Enable TCP/IP Protocol in SQL Server
+Open SQL Server Configuration Manager.
+
+Navigate to:
+
+pgsql
+Copy
+Edit
+SQL Server Network Configuration > Protocols for MSSQLSERVER
+Enable TCP/IP (Right-click > Enable).
+
+Restart SQL Server service:
+
+pgsql
+Copy
+Edit
+SQL Server Services > SQL Server (MSSQLSERVER) > Restart
+
+
+
+✅ 2. Allow SQL Server Port in Windows Firewall
+By default, SQL Server uses port 1433.
+
+Go to Control Panel > Windows Defender Firewall > Advanced settings.
+
+Click on Inbound Rules > New Rule.
+
+Select Port, click Next.
+
+Choose TCP, type 1433 in the port field.
+
+Allow the connection > Name it like "SQL Server 1433" > Finish.
+
+
+
+✅ 3. Create a SQL Login for Remote User
+Open SSMS on your server.
+
+Connect to the instance.
+
+Expand Security > Logins.
+
+Right-click > New Login...
+
+Choose SQL Server Authentication.
+
+Username: e.g., remote_user
+
+Password: e.g., StrongPass123
+
+Uncheck “Enforce password policy” (optional).
+
+Under User Mapping, check the database you want them to access.
+
+Assign roles like db_datareader, db_datawriter, or db_owner.
+
+
+
+
+✅ 4. Ensure SQL Server is Set to Mixed Mode Authentication
+In SSMS, right-click on the server instance > Properties.
+
+Go to Security tab.
+
+Make sure SQL Server and Windows Authentication mode is selected.
+
+Restart the SQL Server service.
+
+
+
+
+✅ 5. Find the Server's IP Address
+On the server PC, open Command Prompt:
+
+bash
+Copy
+Edit
+ipconfig
+Look for IPv4 Address (e.g., 192.168.1.10).
+
+
+
+
+✅ 6. Remote User Connects from Their PC
+In their SSMS:
+
+Server name: 192.168.1.10,1433 (replace with your IP)
+
+Authentication: SQL Server Authentication
+
+Login: remote_user
+
+Password: StrongPass123
+
+✅ They should now be able to connect!
+
+🧪 Test Connection
+You can use this command from the remote user’s Command Prompt to test:
+
+bash
+Copy
+Edit
+telnet 192.168.1.10 1433
+If it connects (blank screen), the port is open. If not, firewall or config may be blocking it.
+
+🧷 Optional (for public internet / WAN access):
+Set up port forwarding on your router (not recommended for security unless done securely with VPN).
+
+Use SSL encryption or Azure SQL for public access instead.
+
+
+
+✅ What the Other PC Needs to Do
+💡 Example Details
+Let’s say:
+
+Your PC (SQL Server Host) IP = 192.168.1.10
+
+SQL Server Port = 1433 (default)
+
+Username = remote_user
+
+Password = StrongPass123
+
+SQL Server Name = MSSQLSERVER (default instance)
+
+🔗 Step-by-Step: Connect from Another PC
+✅ 1. Open SQL Server Management Studio (SSMS)
+Download link (if not installed): https://aka.ms/ssms
+
+✅ 2. Connect to the Server
+Server name:
+
+Copy
+Edit
+192.168.1.10,1433
+If your SQL Server is a named instance, use:
+
+Copy
+Edit
+192.168.1.10\SQLEXPRESS
+or
+
+Copy
+Edit
+192.168.1.10\YourInstanceName
+Authentication:
+
+pgsql
+Copy
+Edit
+SQL Server Authentication
+Login:
+
+nginx
+Copy
+Edit
+remote_user
+Password:
+
+nginx
+Copy
+Edit
+StrongPass123
+🧪 Troubleshooting if it doesn't work:
+✅ 1. Check Firewall on Server PC
+Make sure the port 1433 is allowed:
+
+Go to Control Panel > Windows Defender Firewall > Advanced Settings
+
+Add Inbound Rule for:
+
+Protocol: TCP
+
+Port: 1433
+
+✅ 2. Confirm SQL Server is Listening on TCP/IP
+Open SQL Server Configuration Manager
+
+Under SQL Server Network Configuration > Protocols for MSSQLSERVER
+
+Ensure TCP/IP is enabled
+
+Right-click > Properties > IP Addresses tab
+
+Under IPAll, ensure:
+
+java
+Copy
+Edit
+TCP Port = 1433
+✅ 3. Restart SQL Server after any config changes
+✅ 4. Ping the Server from Client PC
+Open Command Prompt on the client PC and try:
+
+bash
+Copy
+Edit
+ping 192.168.1.10
+Then try:
+
+bash
+Copy
+Edit
+telnet 192.168.1.10 1433
+If it connects (blank screen), port 1433 is open. If not, firewall/config issue exists.
+
+
+
+
+
+
+
+
+
+
+
+

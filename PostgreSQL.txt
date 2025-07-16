@@ -1,0 +1,71 @@
+
+------------------------create database and table  in gui-------------------------------------------
+
+start a pgadmin 4 -> enter password
+
+server -> click -> postgresql17 click -> database right click -> create -> database -> enter database name -> 
+then new database like bizinsights -> schemas -> public -> table then right click -> create table -> enter table name (general)
+->   create a columns in table (columns tab)-> save  table
+
+
+
+
+------------------with query------------------------------ 
+
+
+***create columns***
+
+
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    employee_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+***create rows***
+
+
+INSERT INTO employees (employee_id, employee_name, email)
+VALUES (4, 'ravi', 'ravi123@gmail.com');
+
+***update and edit table***
+
+UPDATE employees
+SET email = 'newemail@gmail.com'
+WHERE employee_id = 2;
+
+***show table***
+
+SELECT * FROM employees;
+
+SELECT employee_name, email FROM employees WHERE employee_id = 1;
+
+
+***delete a table columns and rows***
+
+DELETE FROM employees
+WHERE employee_id = 3;
+
+
+
+==>permission set in table<==
+
+GRANT ALL PRIVILEGES ON TABLE employees TO app_user;
+
+==>permission set in database<==
+
+GRANT CONNECT ON DATABASE mydb TO app_user;
+
+
+:::::::::::create user in  postgreSQl:::::::::::::::::::::::::::
+
+CREATE USER new_user WITH PASSWORD 'your_password';
+CREATE USER dev_user WITH CREATEDB CREATEROLE LOGIN PASSWORD 'dev_pass123';
+CREATE USER admin_user WITH SUPERUSER LOGIN PASSWORD 'admin_pass';
+
+
+🧠 Optional: Grant Permissions After Creating User
+
+GRANT CONNECT ON DATABASE mydb TO new_user;
+GRANT USAGE ON SCHEMA public TO new_user;
+GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO new_user;
