@@ -1,0 +1,95 @@
+--------------------backup in ubuntu--------------
+
+Step 1: Open Terminal
+🔹 Step 2: Run this command to create a backup
+
+Syntax:
+
+tar -czvf <backup-name.tar.gz> /path/to/folder
+------c = create
+------z = compress with gzip
+------v = verbose (shows progress)
+------f = file name for the archive
+backup-name.tar.gz = ex=> file name of backup file
+/path/to/folder = store a file and home/username
+
+
+🔹 Step 3: Verify the Backup
+
+To list contents of the archive:
+
+tar -tzvf home-backup.tar.gz
+
+✅ 4 :Restore from Backup
+
+To restore (extract) the files:
+
+tar -xzvf home-backup.tar.gz -C /destination/path
+
+-------/destination/path => restore a file in your system
+
+📝 Optional: Backup Specific File Types or Exclude Certain Files
+🔸 Backup only .txt files:
+
+tar -czvf text-files-backup.tar.gz *.txt
+
+ ----:Exclude a folder:
+
+tar --exclude='/home/your-username/Videos' -czvf backup.tar.gz /home/your-username
+
+
+----------backup with GUI---------
+sudo apt install deja-dup
+
+sreach backup -> backup
+ 
+ select folder for backup--> enter password -> start backup
+ 
+ restor -> select backup file -> select restore -> enter password -> start restore
+ ----------------------------------------------------------------------
+ ✅ Backup in Ubuntu Using GUI (Déjà Dup)
+🔹 Step 1: Install Déjà Dup (if not already installed)
+
+Open a terminal and run:
+
+sudo apt install deja-dup
+
+Or install it from Ubuntu Software: Search for "Backups".
+🔹 Step 2: Open Déjà Dup
+
+    Go to the Activities menu or App Launcher.
+
+    Search for “Backups” and launch the app.
+
+🔹 Step 3: Set Up Your Backup
+
+In the Déjà Dup window, configure the following tabs:
+✅ Folders to Back Up
+
+    Add the folders you want to include (e.g., Documents, Pictures, etc.).
+
+✅ Folders to Ignore
+
+    Add folders you want to exclude from the backup (e.g., Downloads, Trash).
+
+✅ Storage Location
+
+    Choose where to save your backups:
+
+        Local Folder
+
+        Network Server (e.g., Samba share)
+
+        Google Drive
+
+        Nextcloud
+
+If you’re using a network location, you'll be prompted to enter credentials when first connecting.
+✅ Scheduling
+
+    Enable automatic backups (daily, weekly).
+
+    Choose how long to keep old backups (e.g., "Forever", "6 months").
+ 
+
+
